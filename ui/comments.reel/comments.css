@@ -30,6 +30,7 @@
   font-family: Verdana;
   /* width: 100%; */
   word-break: break-word;
+  max-width: 550px;
 }
 
 .Comments .info-line {

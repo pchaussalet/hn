@@ -31,6 +31,7 @@
   padding-top: 0px;
   border-top: 1px solid;
   width: 50%;
+  max-width: 400px;
   margin-left: 45px;
   opacity: 0.25;
   margin-bottom: 10px;
@@ -54,6 +55,7 @@
   line-height: 1.3rem;
   word-break: break-word;
   font-family: Verdana;
+  max-width: 550px;
 }
 
 .User .submission .comment-glyph::before {
