@@ -1,0 +1,39 @@
+.Comments {
+}
+
+.Comments .comment {
+  display: table;
+  margin: 8px 0;
+  width: 100%;
+}
+
+
+.Comments .indent {
+  display: table-cell;
+  white-space: nowrap;
+  font-size: 0;
+}
+
+.Comments .indenter {
+  width: 35px;
+  display: inline-block;
+}
+
+.Comments .comment-ui-entry {
+  display: table-cell;
+}
+
+.Comments .comment-content .RawHtml {
+  letter-spacing: 0.005rem;
+  word-spacing: 0.02rem;
+  line-height: 1.3rem;
+  font-family: Verdana;
+  /* width: 100%; */
+  word-break: break-word;
+}
+
+.Comments .info-line {
+  opacity: 0.33;
+  font-style: italic;
+  padding: 2px 0;
+}
