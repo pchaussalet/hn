@@ -195,6 +195,7 @@ exports.Main = Component.specialize(/** @lends Main# */ {
                     dx = dx < 0 ? -1.0/(1<<(-dx)) : dx*1.2;
 
                     child.style.transform = "translate3d("+dx*100+"%, 0, 0)";
+                    child.style.WebkitTransform = "translate3d("+dx*100+"%, 0, 0)";
                 }
             } else {
                 this.needsDraw = true;

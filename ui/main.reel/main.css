@@ -20,6 +20,7 @@
     background: white;
     /* box-shadow: -20px 0 20px 0px rgb(77, 77, 77); */
     transition: transform 0.5s ease-in-out;
+    -webkit-transition: -webkit-transform 0.5s ease-in-out;
 }
 
 .Main .NavigationSlot::before {
