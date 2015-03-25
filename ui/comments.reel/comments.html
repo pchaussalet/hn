@@ -65,6 +65,9 @@
         "url-user-id-converter": {
             "prototype": "lib/hn-user-url-converter"
         },
+        "url-item-id-converter": {
+            "prototype": "lib/hn-item-url-converter"
+        },
         "more-link": {
             "prototype": "ui/link.reel",
             "properties": {
@@ -82,6 +85,16 @@
             },
             "bindings": {
                 "url": {"<-": "@repetition:iteration.object.content.content.by"}
+            }
+        },
+        "comment-link": {
+            "prototype": "ui/link.reel",
+            "properties": {
+                "element": {"#": "comment-link"},
+                "urlConverter": { "@": "url-item-id-converter" }
+            },
+            "bindings": {
+                "url": {"<-": "@repetition:iteration.object.content.content.id"}
             }
         },
         "author": {
@@ -115,7 +128,11 @@
                     </div>
                     <div data-montage-id="comment-ui-substitution" class="comment-ui-entry">
                         <div data-arg="comment" class="comment-content">
-                            <div class="info-line"><a data-montage-id="author-link"><span data-montage-id="author"></span> — <span data-montage-id="time"></span> ago</a></div>
+                            <div class="info-line">
+                                <a data-montage-id="author-link"><span data-montage-id="author"></span></a>
+                                 — 
+                                <a data-montage-id="comment-link"><span data-montage-id="time"></span> ago</a>
+                            </div>
                             <div data-montage-id="comment-raw"></div>
                         </div>
                         <div data-arg="more-placeholder">
