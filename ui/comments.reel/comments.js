@@ -18,10 +18,11 @@ function Node(content, children, depth, nodeType) {
 }
 
 
-var fetchKids = function(node, offset, count) {
+var fetchKids = function(node, offset, count, depth) {
     var uOffset = offset || 0;
     var uCount = count || 10;
     var allWait = [];
+    var maxDepth = (depth || 0) + 3;
     // fetch node.content.kids;
     var _c, kids = (_c = node, _c = _c && _c.content, _c && _c.kids);
     kids && kids.slice(uOffset,uOffset+uCount).forEach(function(key, index) {
@@ -49,11 +50,12 @@ var fetchKids = function(node, offset, count) {
         })
         return Promise.all(results.map(function(n) {
             if (n && n.content && n.content.kids && n.content.kids.length > 0) {
-                if (n.depth < 4) {
-                    return fetchKids(n);
+                if (n.depth < (maxDepth+1)) {
+                    return fetchKids(n, 0, null, depth);
                 } else {
                     return new Promise(function(resolve, reject) {
-                        resolve(new Node({parent: node}, null, node.depth, "more-placeholder"));
+                        n.children.push(new Node({parent: n}, null, n.depth, "more-placeholder"));
+                        resolve();
                     });
                 }
             } 
@@ -78,9 +80,11 @@ exports.Comments = Component.specialize(/** @lends Comments# */ {
         value: function(event) {
             var placeholder; 
             if (event.target.component && (placeholder = event.target.component.nodeData)) {
-                var loadNode = placeholder.content.parent.content;
+                var loadNode   = placeholder.content.parent.content;
                 var loadOffset = placeholder.content.parent.children.length-1;
-                fetchKids(placeholder.content.parent, loadOffset).then(function(){
+                var depth      = placeholder.content.parent.depth;
+
+                fetchKids(placeholder.content.parent, loadOffset, null, depth).then(function(){
                     // remove placeholder
                     placeholder.content.parent.children.splice(loadOffset, 1);
                 });
