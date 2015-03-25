@@ -92,23 +92,9 @@ exports.Main = Component.specialize(/** @lends Main# */ {
                             this.navigation.push({kind: "loading"});
                         }
                     } else {
-                        this.navigation[this.navigationIndex] = {kind: "loading"};
+                        this.navigation[this.navigationIndex].kind    = "loading";
+                        this.navigation[this.navigationIndex].item_id = null;
                     }
-
-                    try {
-                        // catch exceptions since it throws on unbound paths
-                        this.cancelBinding("templateObjects.repetition.childComponents." + this.navigationIndex + ".switchValue");
-                        this.cancelBinding("templateObjects.repetition.childComponents." + this.navigationIndex + ".childComponents.0.itemId");
-                    } catch(e) {};
-
-                    this.previousKindBindCancel = this.defineBinding(
-                        "templateObjects.repetition.childComponents." + this.navigationIndex + ".switchValue", 
-                        { "<-": "navigation." + this.navigationIndex + ".kind"}
-                    );
-                    this.previousIdBindCancel = this.defineBinding(
-                        "templateObjects.repetition.childComponents." + this.navigationIndex + ".childComponents.0.itemId", 
-                        { "<-": "navigation." + this.navigationIndex + ".item_id"}
-                    );
 
                     if (! restoredState) {                    
                         history.pushState(
