@@ -45,9 +45,6 @@ var fetchKids = function(node, offset, count, depth) {
     }
     
     return Promise.all(allWait).then(function(results) {
-        results.forEach(function(o) {
-            node.children.push(o);
-        })
         return Promise.all(results.map(function(n) {
             if (n && n.content && n.content.kids && n.content.kids.length > 0) {
                 if (n.depth < (maxDepth+1)) {
@@ -60,7 +57,11 @@ var fetchKids = function(node, offset, count, depth) {
                 }
             } 
             
-        }));
+        })).then(function() {
+            results.forEach(function(o) {
+                node.children.push(o);
+            })
+        });
     });
 };
 
